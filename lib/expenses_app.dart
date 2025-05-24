@@ -1,5 +1,4 @@
 import 'package:expense_tracker/db/expense_storage.dart';
-import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widgets/expenses_list.dart';
@@ -20,23 +19,6 @@ class ExpensesApp extends StatefulWidget {
 }
 
 class _ExpensesAppState extends State<ExpensesApp> {
-  void _openAddExpenseOverlay() {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      builder: (ctx) => NewExpense(_addNewExpense),
-    );
-  }
-
-  void _addNewExpense(Expense expense) async {
-    setState(() {
-      // now, when you want to use registeredExpensesList in the State class, you use the widget varaible
-      widget.registeredExpensesList.add(expense);
-    });
-    // insert the new expense to the database
-    insertExpense(expense);
-  }
-
   void _deleteExpense(Expense expense) {
     int index = widget.registeredExpensesList.indexOf(expense);
     setState(() {
@@ -84,15 +66,6 @@ class _ExpensesAppState extends State<ExpensesApp> {
       );
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Expense Tracker"),
-        actions: [
-          IconButton(
-            onPressed: _openAddExpenseOverlay,
-            icon: Icon(Icons.add),
-          ),
-        ],
-      ),
       body: Column(
         children: [
           Expanded(

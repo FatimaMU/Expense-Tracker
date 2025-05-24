@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:expense_tracker/db/expense_storage.dart';
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/screens/tabs.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/expenses_app.dart';
 
 // install and import sqflite_common_ffi if you are running a windows application
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -36,9 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // Pass the registered expenses to ExpensesApp to be displyed in the ListView
-      home: ExpensesApp(
-        registeredExpensesList: registeredExpenses,
-      ),
+      home: TabsScreen(expensesList: registeredExpenses),
     );
   }
 }
